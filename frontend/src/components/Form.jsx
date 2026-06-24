@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Button from "./Button.jsx";
 import TaskList from "./TaskList.jsx";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Form() {
   const [categories, setCategories] = useState([]);
