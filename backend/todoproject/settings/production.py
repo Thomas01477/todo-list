@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+import sentry_sdk
 from .base import *
 
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -26,3 +27,10 @@ CORS_ALLOWED_ORIGINS = [
     for o in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
     if o.strip()
 ]
+
+_sentry_dsn = os.environ.get("SENTRY_DSN")
+if _sentry_dsn:
+    sentry_sdk.init(
+        dsn=_sentry_dsn,
+        traces_sample_rate=1.0,
+    )
