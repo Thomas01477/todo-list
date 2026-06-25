@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import * as Sentry from "@sentry/react";
 import Button from "./Button.jsx";
 import TaskList from "./TaskList.jsx";
 
@@ -187,8 +188,7 @@ function Form() {
       <button
         type="button"
         onClick={() => {
-          const user = undefined;
-          console.log(user.name);
+          Sentry.captureException(new Error("Test Sentry React"));
         }}
         style={{ marginTop: "20px", display: "block", marginLeft: "auto", marginRight: "auto" }}
       >
