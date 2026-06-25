@@ -4,10 +4,16 @@ import * as Sentry from "@sentry/react";
 import "./index.css";
 import Form from "./components/Form.jsx";
 
-if (import.meta.env.VITE_SENTRY_DSN) {
+if (import.meta.env.PROD) {
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
-    tracesSampleRate: 1.0,
+    integrations: [
+      Sentry.browserTracing(),
+      Sentry.replay(),
+    ],
+    traces_sample_rate: 1.0,
+    replays_session_sample_rate: 0.1,
+    replays_on_error_sample_rate: 1.0,
   });
 }
 

@@ -1,6 +1,7 @@
 import os
 import dj_database_url
 import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 from .base import *
 
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -28,9 +29,12 @@ CORS_ALLOWED_ORIGINS = [
     if o.strip()
 ]
 
-_sentry_dsn = os.environ.get("SENTRY_DSN")
-if _sentry_dsn:
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
+
+if SENTRY_DSN:
     sentry_sdk.init(
-        dsn=_sentry_dsn,
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()],
         traces_sample_rate=1.0,
+        send_default_pii=True,
     )

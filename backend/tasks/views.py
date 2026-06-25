@@ -1,9 +1,16 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import JsonResponse
 
 from .models import Category, Task
 from .serializers import CategorySerializer, TaskSerializer
+
+
+def trigger_error(request):
+    """Vue conçue pour tester l'intégration Sentry."""
+    division_by_zero = 1 / 0
+    return JsonResponse({"this": "will never be returned"})
 
 
 @api_view(["GET", "POST"])
