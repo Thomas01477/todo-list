@@ -8,8 +8,8 @@ if (import.meta.env.PROD) {
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
     integrations: [
-      Sentry.browserTracing(),
-      Sentry.replay(),
+      Sentry.browserTracingIntegration(),
+      Sentry.replayIntegration(),
     ],
     traces_sample_rate: 1.0,
     replays_session_sample_rate: 0.1,
